@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+exports=$(cat lib/web/exported_functions.json)
+
+emcc                                 \
+  -O3                                \
+  -std=c99                           \
+  -s WASM=1                          \
+  -s ALLOW_MEMORY_GROWTH             \
+  -s "EXPORTED_FUNCTIONS=${exports}" \
+  -s RESERVED_FUNCTION_POINTERS=2    \
+  -D 'fprintf(...)='                 \
+  -D 'printf(...)='                  \
+  -D 'puts(...)='                    \
+  -I lib/src                         \
+  -I lib/include                     \
+  -I lib/utf8proc                    \
+  lib/src/lib.c                      \
+  lib/web/binding.c                  \
+  -o lib/web/tree-sitter.wasm

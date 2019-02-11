@@ -1,0 +1,7 @@
+[
+  "_ts_parser_new_wasm",
+  "_ts_parser_delete_wasm",
+  "_ts_parser_parse_wasm",
+  "_ts_parser_language",
+  "_ts_parser_set_language"
+]

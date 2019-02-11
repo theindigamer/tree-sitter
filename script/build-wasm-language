@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+language_name="javascript"
+sources=$(ls ${1}/src/{parser,scanner}*)
+
+emcc                                                      \
+  -O3                                                     \
+  -s WASM=1 -s                                            \
+  SIDE_MODULE=1                                           \
+  -s EXPORTED_FUNCTIONS=["_tree_sitter_${language_name}"] \
+  -I ${1}/src                                             \
+  $sources                                                \
+  -o tree-sitter-${language_name}.wasm
